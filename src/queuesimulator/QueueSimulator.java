@@ -56,6 +56,16 @@ public void dequeue() {
     public int getSize(){
         return count;
     }
+    
+    //view front without removing it
+    public int peek(){
+        if (isEmpty()){
+            System.out.println("Queue is empty! no front element to view");
+            return -1;
+        }
+        else
+            return queue[front];
+    }
 
  // Display queue contents
 public void displayQueue() {
@@ -89,7 +99,8 @@ public void displayQueue() {
             System.out.println("2. Dequeue");
             System.out.println("3. Display Queue");
             System.out.println("4. check queue size");
-            System.out.println("5. Exit");
+            System.out.println("5. view front element (peek)");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
 
             choice = scan.nextInt();
@@ -112,8 +123,16 @@ public void displayQueue() {
                     
                 case 4:
                     System.out.println("current queue size is" + queue.getSize());
-
+                    break;
+                    
                 case 5:
+                    int frontElement = queue.peek();
+                    if (frontElement != -1){
+                        System.out.println("the front element is: " + frontElement);
+                    }
+                    break;
+
+                case 6:
                     System.out.println("Exiting program...");
                     break;
 
@@ -121,7 +140,7 @@ public void displayQueue() {
                     System.out.println("Invalid choice. Please try again.");
             }
 
-        } while (choice != 5);
+        } while (choice != 6);
 
         scan.close();
     }
