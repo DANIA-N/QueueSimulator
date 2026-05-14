@@ -10,6 +10,7 @@ public class QueueSimulator {
     private int front;
     private int rear;
     private int capacity;
+    private int count; 
 
     // Constructor
     public QueueSimulator(int size) {
@@ -17,37 +18,38 @@ public class QueueSimulator {
         queue = new int[capacity];
         front = 0;
         rear = -1;
+        count = 0; 
     }
 
     // Enqueue operation
     public void enqueue(int value) {
-        if (rear == capacity - 1) {
-            System.out.println("Queue Overflow! Cannot enqueue.");
-            return;
-        }
-
-        rear++;
-        queue[rear] = value;
-
-        System.out.println(value + " added to the queue.");
+    if (count == capacity) {
+        System.out.println("Queue is full! Cannot enqueue " + value);
+        return;
     }
+
+    rear = (rear + 1) % capacity;
+    queue[rear] = value;
+    count++;
+    System.out.println(value + " added to the queue.");
+}
 
     // Dequeue operation
-    public void dequeue() {
-        if (isEmpty()) {
-            System.out.println("Queue Underflow! Queue is empty.");
-            return;
-        }
-
-        int removedValue = queue[front];
-        front++;
-
-        System.out.println(removedValue + " removed from the queue.");
+public void dequeue() {
+    if (isEmpty()) {
+        System.out.println("Queue is empty! Nothing to dequeue.");
+        return;
     }
+
+    int removedValue = queue[front];
+    front = (front + 1) % capacity;
+    count--;
+    System.out.println(removedValue + " removed from the queue.");
+}
 
     // Check if queue is empty
     public boolean isEmpty() {
-        return front > rear;
+        return count == 0;
     }
 
     // Display queue contents
