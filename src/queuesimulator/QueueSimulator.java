@@ -12,7 +12,12 @@ public class QueueSimulator {
     private int capacity;
     private int count; 
 
-    // Constructor
+    
+
+    /**
+ * Initializes the queue simulator with a specified capacity.
+ * @param size The maximum number of elements the queue can hold.
+ */
     public QueueSimulator(int size) {
         capacity = size;
         queue = new int[capacity];
@@ -21,7 +26,13 @@ public class QueueSimulator {
         count = 0; 
     }
 
-    // Enqueue operation
+    
+
+    /**
+ * Adds a new integer to the rear of the queue.
+ * Includes a check to prevent overflow if the queue is full.
+ * @param value The integer to be added to the queue.
+ */
     public void enqueue(int value) {
     if (count == capacity) {
         System.out.println("ERROR: Queue is full! Cannot enqueue " + value + ". Please dequeue an element first.");
@@ -34,7 +45,12 @@ public class QueueSimulator {
     System.out.println(value + " added to the queue.");
 }
 
-    // Dequeue operation
+    
+    /**
+     * Removes and returns the element at the front of the queue.
+     * This method first checks for an "Underflow" condition to ensure 
+     * the queue is not empty before attempting to remove an item.
+     */
 public void dequeue() {
     if (isEmpty()) {
         System.out.println("Queue is empty! Nothing to dequeue.");
@@ -47,17 +63,30 @@ public void dequeue() {
     System.out.println(removedValue + " removed from the queue.");
 }
 
-    // Check if queue is empty
+   
+    /**
+     * Checks whether the queue is currently empty.
+     * @return true if the queue contains no elements, false otherwise.
+     */
     public boolean isEmpty() {
         return count == 0;
     }
     
-    //check current queue size
+   
+/**
+     * Returns the total number of elements currently stored in the queue.
+     * @return the current size of the queue.
+     */
     public int getSize(){
         return count;
     }
     
     // Returns the front element without removing it
+    /**
+     * Returns the front element of the queue without removing it.
+     * This method allows the user to see the next item to be processed.
+     * @return the value of the front element, or -1 if the queue is empty.
+     */
     public int peek(){
     if (isEmpty()){
         System.out.println("Queue is empty! No front element to view");
@@ -67,7 +96,11 @@ public void dequeue() {
     return queue[front];
 }
 
- // Display queue contents in a user-friendly format 
+ 
+ /**
+     * Displays all the elements currently in the queue in a user-friendly format.
+     * If the queue is empty, it notifies the user.
+     */
 public void displayQueue() {
     if (isEmpty()) {
         System.out.println(">>> Queue Status: Empty");
