@@ -57,15 +57,15 @@ public void dequeue() {
         return count;
     }
     
-    //view front without removing it
+    // Returns the front element without removing it
     public int peek(){
-        if (isEmpty()){
-            System.out.println("Queue is empty! no front element to view");
-            return -1;
-        }
-        else
-            return queue[front];
+    if (isEmpty()){
+        System.out.println("Queue is empty! No front element to view");
+        return -1;
     }
+    // Removed unnecessary 'else' to reduce cyclomatic complexity
+    return queue[front];
+}
 
  // Display queue contents in a user-friendly format 
 public void displayQueue() {
@@ -81,63 +81,46 @@ public void displayQueue() {
 }
 
     // Main method
-    public static void main(String[] args) {
+    // Extracted menu display logic to a separate method
+public static void displayMenu() {
+    System.out.println("\n===== Queue Operation Simulator =====");
+    System.out.println("1. Enqueue");
+    System.out.println("2. Dequeue");
+    System.out.println("3. Display Queue");
+    System.out.println("4. Check Queue Size");
+    System.out.println("5. View Front Element (Peek)");
+    System.out.println("6. Exit");
+    System.out.print("Enter your choice: ");
+}
 
-        Scanner scan = new Scanner(System.in);
-
+public static void main(String[] args) {
+    // try-with-resources to ensure scanner is closed automatically
+    try (Scanner scan = new Scanner(System.in)) {
         QueueSimulator queue = new QueueSimulator(4);
-
         int choice;
-
         do {
-            System.out.println("\n===== Queue Operation Simulator =====");
-            System.out.println("1. Enqueue");
-            System.out.println("2. Dequeue");
-            System.out.println("3. Display Queue");
-            System.out.println("4. check queue size");
-            System.out.println("5. view front element (peek)");
-            System.out.println("6. Exit");
-            System.out.print("Enter your choice: ");
-
+            displayMenu(); // Cleaner main method
             choice = scan.nextInt();
 
+            // Using enhanced switch (->) for better readability
             switch (choice) {
-
-                case 1:
+                case 1 -> {
                     System.out.print("Enter value to enqueue: ");
                     int value = scan.nextInt();
                     queue.enqueue(value);
-                    break;
-
-                case 2:
-                    queue.dequeue();
-                    break;
-
-                case 3:
-                    queue.displayQueue();
-                    break;
-                    
-                case 4:
-                    System.out.println("current queue size is" + queue.getSize());
-                    break;
-                    
-                case 5:
+                }
+                case 2 -> queue.dequeue();
+                case 3 -> queue.displayQueue();
+                case 4 -> System.out.println("Current size: " + queue.getSize());
+                case 5 -> {
                     int frontElement = queue.peek();
-                    if (frontElement != -1){
-                        System.out.println("the front element is: " + frontElement);
-                    }
-                    break;
-
-                case 6:
-                    System.out.println("Exiting program...");
-                    break;
-
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+                    if (frontElement != -1) System.out.println("Front: " + frontElement);
+                }
+                case 6 -> System.out.println("Exiting...");
+                default -> System.out.println("Invalid choice.");
             }
-
         } while (choice != 6);
-
-        scan.close();
     }
+}
+
 }
