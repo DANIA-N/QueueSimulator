@@ -24,7 +24,7 @@ public class QueueSimulator {
     // Enqueue operation
     public void enqueue(int value) {
     if (count == capacity) {
-        System.out.println("Queue is full! Cannot enqueue " + value);
+        System.out.println("ERROR: Queue is full! Cannot enqueue " + value + ". Please dequeue an element first.");
         return;
     }
 
@@ -52,21 +52,22 @@ public void dequeue() {
         return count == 0;
     }
 
-    // Display queue contents
-    public void displayQueue() {
-        if (isEmpty()) {
-            System.out.println("Queue is empty.");
-            return;
-        }
-
-        System.out.print("Queue contents: ");
-
-        for (int i = front; i <= rear; i++) {
-            System.out.print(queue[i] + " ");
-        }
-
-        System.out.println();
+ // Display queue contents
+public void displayQueue() {
+    if (isEmpty()) {
+        System.out.println("Queue is empty.");
+        return;
     }
+
+    System.out.print("Queue contents: ");
+
+    for (int i = 0; i < count; i++) {
+        int index = (front + i) % capacity;
+        System.out.print(queue[index] + " ");
+    }
+
+    System.out.println();
+}
 
     // Main method
     public static void main(String[] args) {
