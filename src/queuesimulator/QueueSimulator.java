@@ -67,21 +67,17 @@ public void dequeue() {
             return queue[front];
     }
 
- // Display queue contents
+ // Display queue contents in a user-friendly format 
 public void displayQueue() {
     if (isEmpty()) {
-        System.out.println("Queue is empty.");
+        System.out.println(">>> Queue Status: Empty");
         return;
     }
-
-    System.out.print("Queue contents: ");
-
-    for (int i = 0; i < count; i++) {
-        int index = (front + i) % capacity;
-        System.out.print(queue[index] + " ");
+    System.out.print(">>> Queue Contents: [ ");
+    for (int i = front; i <= rear; i++) {
+        System.out.print(queue[i] + (i == rear ? "" : ", "));
     }
-
-    System.out.println();
+    System.out.println(" ]");
 }
 
     // Main method
