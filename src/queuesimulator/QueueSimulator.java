@@ -51,6 +51,11 @@ public void dequeue() {
     public boolean isEmpty() {
         return count == 0;
     }
+    
+    //check current queue size
+    public int getSize(){
+        return count;
+    }
 
  // Display queue contents
 public void displayQueue() {
@@ -83,7 +88,8 @@ public void displayQueue() {
             System.out.println("1. Enqueue");
             System.out.println("2. Dequeue");
             System.out.println("3. Display Queue");
-            System.out.println("4. Exit");
+            System.out.println("4. check queue size");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
 
             choice = scan.nextInt();
@@ -103,8 +109,11 @@ public void displayQueue() {
                 case 3:
                     queue.displayQueue();
                     break;
-
+                    
                 case 4:
+                    System.out.println("current queue size is" + queue.getSize());
+
+                case 5:
                     System.out.println("Exiting program...");
                     break;
 
@@ -112,7 +121,7 @@ public void displayQueue() {
                     System.out.println("Invalid choice. Please try again.");
             }
 
-        } while (choice != 4);
+        } while (choice != 5);
 
         scan.close();
     }
