@@ -131,14 +131,25 @@ public static void main(String[] args) {
     try (Scanner scan = new Scanner(System.in)) {
         QueueSimulator queue = new QueueSimulator(4);
         int choice;
-        do {
-            displayMenu(); // Cleaner main method
-            choice = scan.nextInt();
+       do {
+            displayMenu(); 
+            
+            // KAN-12: Input validation to handle non-integer input and prevent crashes
+            while (!scan.hasNextInt()) {
+                System.out.println("ERROR: Invalid input! Please enter a number between 1 and 6.");
+                scan.next(); 
+                displayMenu(); 
+            }
+            
+            choice = scan.nextInt(); 
 
-            // Using enhanced switch (->) for better readability
             switch (choice) {
                 case 1 -> {
                     System.out.print("Enter value to enqueue: ");
+                    while (!scan.hasNextInt()) {
+                        System.out.println("Invalid input! Please enter an integer.");
+                        scan.next();
+                    }
                     int value = scan.nextInt();
                     queue.enqueue(value);
                 }
